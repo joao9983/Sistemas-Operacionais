@@ -1,3 +1,3 @@
 ## Sistemas-Operacionais
-Projeto da cadeira de Sistemas Operacionais
+Projetos referentes à cadeira de Sistemas Operacionais
 
