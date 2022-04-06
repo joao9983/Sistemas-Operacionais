@@ -6,7 +6,7 @@ public class ConsumerThread extends Thread {
 	
 	private int consumerNumber;
 	private int wagonToTravel;
-	private int timeToTravel;
+	public int timeToTravel;
 	private BoundedBuffer buffer;
 	
 	//Initialize variables in constructor
@@ -25,6 +25,8 @@ public class ConsumerThread extends Thread {
 				buffer.acquireFull(wagonToTravel);
 				buffer.acquireMutex();
 				System.out.println("HIIII");
+				/* trem = new Trem();
+				trem.load(); */
 				//Remove the next item and put it in the box
 				System.out.println("Retirando: " + wagonToTravel);
 				buffer.removeItem(wagonToTravel);
