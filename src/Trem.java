@@ -15,8 +15,7 @@ public class Trem {
 		this.call = 0;
 		this.x = -410; //1375
 		this.y = 638;
-		this.time = timeToTravel;
-		
+		this.time = timeToTravel;	
 	}
 	
 	public void load() {
@@ -32,7 +31,6 @@ public class Trem {
 		x +=dx;
 //		this.setX(x+=dx);
 		y +=dy;
-		System.out.println(this.call);
 	}
 	
 //	public void keyviagem() {
