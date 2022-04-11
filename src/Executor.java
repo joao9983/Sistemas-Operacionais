@@ -22,7 +22,7 @@ public class Executor {
 		int bufferSize = Integer.parseInt("50");
 		int timeToProduce = Integer.parseInt("10");
 		int timeToTravel = Integer.parseInt("10");
-		int wagonCapacity = Integer.parseInt("25");
+		int wagonCapacity = Integer.parseInt("2");
 		//Create a new buffer of the appropriate size
 		BoundedBuffer buffer = new BoundedBuffer(bufferSize);
 		//Create and start the producers

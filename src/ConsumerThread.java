@@ -19,7 +19,9 @@ public class ConsumerThread extends Thread {
 	private int call;
 	private int flag;
 	private int time;
+	private double totalMoved;
 	private boolean start;
+	private Fase fas;
 	
 	//Initialize variables in constructor
 	public ConsumerThread(BoundedBuffer buffer, int consumerNumber, int timeToTravel, int wagonToTravel) {
@@ -28,38 +30,38 @@ public class ConsumerThread extends Thread {
 		this.wagonToTravel = wagonToTravel;
 		this.timeToTravel = timeToTravel;
 		this.call = 0;
-		this.x = -410; //1375
+		this.x = -410; //1375 1010 - Trem com vagão some
+		//this.x = -300; // Volta
 		this.y = 638;
 		this.time = timeToTravel;
 		this.start = false;
+		this.totalMoved = -410;
 	}
 	
 	public void run() {
-		//Until the thread is interrupted...
 		while(true) {
 			//Wait until the buffer is not empty
 			try {
 				buffer.acquireFull(wagonToTravel);
 				buffer.acquireMutex();
 				System.out.println("HIIII");
-				/* trem = new Trem();
-				trem.load(); */
-				//Remove the next item and put it in the box
 				System.out.println("Retirando: " + wagonToTravel);
 				buffer.removeItem(wagonToTravel);
 				buffer.releaseMutex();
 				buffer.releaseEmpty(wagonToTravel);
-				this.start = true;
-				this.load();
 				wait(timeToTravel);
 				System.out.println("Cheguei em A");
-				this.start = false;
 			} catch (InterruptedException e) {
 				//Exit notice, print anything remaining in the box, die
 				System.out.println("Thread " + consumerNumber + " exit");
 				break;
 			}
 		}
+	}
+	
+	public void setFas(Fase fas)
+	{
+		this.fas = fas;
 	}
 	
 	public void load() {
@@ -69,20 +71,46 @@ public class ConsumerThread extends Thread {
 		largura = imagem.getWidth(null);
 	}
 	
-	public void update() {
-		this.call = this.call + 1;
-		x +=dx;
+	public void update(Fase fas,int times) {
+		totalMoved = totalMoved + (times * dx);
+		System.out.print("Movido: ");
+		System.out.println(totalMoved);
+		x = ((int) totalMoved);
 //		this.setX(x+=dx);
 		y +=dy;
+		System.out.print("X: ");
+		System.out.println(getX());
+		fas.repaint();
 	}
 
 	public boolean loaded() {
 		return this.start;
 	}
 	private boolean wait(int timeToTravel) {
-		LocalDateTime dateTime = LocalDateTime.now();
 		long time = System.currentTimeMillis();
-		while(System.currentTimeMillis() - time < timeToTravel * 2 * 1000) {}
+		long time2 = time; 
+		setDx(false);
+		changeImagem(true);
+		while(System.currentTimeMillis() - time < timeToTravel * 1000) {
+			while(System.currentTimeMillis() - time2 < 10) {}
+			time2 = System.currentTimeMillis();
+			update(fas,10);
+			//System.out.println(call);
+		}
+		this.call = 0;
+		System.out.println("Passou primeira parte");
+		time = System.currentTimeMillis();
+		time2 = time;
+		setDx(true);
+		changeImagem(false);
+		while(System.currentTimeMillis() - time < timeToTravel * 1000) {
+			while(System.currentTimeMillis() - time2 < 10) {}
+			time2 = System.currentTimeMillis();
+			update(fas,10);
+		}
+		// Atualizar a cada x ms, encontrar quanto que atualiza a cada 1ms
+		// mas atualizar somente a cada y ms, o que faria o valor de 
+		// att ser y * dx;
 		return true;
 	}	
 
@@ -114,11 +142,12 @@ public class ConsumerThread extends Thread {
 		this.imagem = newImage;
 	}
 
-	public void setDx(double timeMove, boolean going) {
+	public void setDx(boolean going) {
 		if(!going) {
-			this.dx = 1410 / ((timeMove * 1000 ) / 15);			
+			this.dx = (double) (1010 - (- 410)) / (timeToTravel * 1000 );			
 		} else {
-			this.dx = 1375 / ((timeMove * 1000 ) / 15);
+			//System.out.println(timeToTravel * (( 1010 - (- 410) ) / 1000 ));
+			this.dx = (double)  - (1010 - (- 410)) / (timeToTravel * 1000 );
 		}
 	}
 
