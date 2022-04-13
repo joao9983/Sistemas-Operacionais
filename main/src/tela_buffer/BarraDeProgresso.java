@@ -9,8 +9,9 @@ import logica.Executor;
 public class BarraDeProgresso extends JFrame {
 
 	private Executor executor;		//será usado para get em class Executor tamanho do buffer
-	public JProgressBar barra = new JProgressBar();
-	
+	public static JProgressBar barra = new JProgressBar();
+
+
 	public BarraDeProgresso() {
 		configurarJanela();
 		barra.setBounds(10, 10, 280, 40);
@@ -32,7 +33,7 @@ public class BarraDeProgresso extends JFrame {
 	}
 	
 	public static void main(String[] args) {
-		new BarraDeProgresso();
+		//new BarraDeProgresso();
 	}
 	
 	public class Func {
