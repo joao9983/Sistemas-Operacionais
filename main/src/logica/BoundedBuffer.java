@@ -2,14 +2,19 @@ package logica;
 
 import java.util.concurrent.Semaphore;
 
-public class BoundedBuffer {
+import tela_buffer.BarraDeProgresso;		//importa o package tela_buffer, classe BarraDeProgresso
+
+public class BoundedBuffer{
 	
 	private int buffer;
 	public int capacity;
 	private Semaphore mutex;
 	private Semaphore empty;
 	private Semaphore full;
+	private BarraDeProgresso Buffer = new BarraDeProgresso();  //Buffer do tipo tela Barra de Progresso
 	
+	
+
 	//Initialize everything in the constructor
 	public BoundedBuffer(int size) {
 		mutex = new Semaphore(1);
@@ -22,6 +27,8 @@ public class BoundedBuffer {
 	//Add in item to tail of the circular array
 	public void addItem() {
 		buffer = buffer + 1;
+
+		Buffer.barra.setValue(buffer+1);		//incrementa o JProgressBar barra da class BarraDeProgresso
 	}
 	public void printBuffer() {
 		System.out.println("Restam: " + buffer);
@@ -30,6 +37,8 @@ public class BoundedBuffer {
 	//Remove and return an item from the head of the circular array
 	public void removeItem(int quantd) {
 		buffer = buffer - quantd;
+
+		Buffer.barra.setValue(buffer-quantd);	//descrementa o JProgressBar barra da class BarraDeProgresso
 	}
 	
 	//If the full semaphore has no permits, the buffer is empty

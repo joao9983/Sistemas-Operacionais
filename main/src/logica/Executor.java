@@ -2,6 +2,7 @@ package logica;
 
 import java.util.ArrayList;
 
+import tela_buffer.BarraDeProgresso;
 
 public class Executor {
 	
@@ -15,6 +16,7 @@ public class Executor {
 	public static int timeToTravel;
 	public static int wagonCapacity;
 	public static ArrayList<Integer> timesToProduce = new ArrayList<>();
+
 	
 	//This class simply contains the main method for the program
 	//It didn't really seem like it belonged in bounded buffer and it
@@ -38,6 +40,9 @@ public class Executor {
 		System.out.println("timeToTravel: "+timeToTravel);
 		System.out.println("wagonCapacity: "+wagonCapacity);
 		
+		
+		BarraDeProgresso Executor = new BarraDeProgresso();
+		Executor.main(args);									//Executa a tela_buffer BarraDeProgresso do Deposito
 		
 		
 		
@@ -97,6 +102,16 @@ public class Executor {
 	public static void setTimesToProduce(ArrayList<Integer> timesToProduce) {
 		Executor.timesToProduce = timesToProduce;
 	}
+
+	public static int getBufferSize() {
+		return bufferSize;				//retorna o tamanho do buffer
+	}
+
+	public static int getWagonCapacity() {
+		return wagonCapacity;
+	}
+
+	
 	
 	
 }

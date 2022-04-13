@@ -1,6 +1,7 @@
 package animacao_modelo;
 
 import java.awt.Graphics;
+
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -18,12 +19,15 @@ public class Fase extends JPanel implements ActionListener{
 	private Image fundo;
 	private Trem trem;
 	private Timer timer;
-	private int i = 0, flag = 1;
+	public static boolean Sinal=false;
+	public int i = 0, flag = 40;
+	public int menosflag = 0-flag;
+	private int distancia = 1700/flag;
 	
 	public Fase() {
 		
-		setFocusable(true);
-		setDoubleBuffered(true);
+//		setFocusable(true);
+//		setDoubleBuffered(true);
 		
 		ImageIcon referencia = new ImageIcon("imgs\\fundo.png");
 		fundo = referencia.getImage();
@@ -31,10 +35,7 @@ public class Fase extends JPanel implements ActionListener{
 		trem = new Trem();
 		trem.load();
 		
-		//keyviagem();
-
-		
-		timer = new Timer(1, this);
+		timer = new Timer(30, this);
 		timer.start();
 		
 	}
@@ -45,30 +46,41 @@ public class Fase extends JPanel implements ActionListener{
 		graficos.drawImage(trem.getImagem(), trem.getX(), trem.getY(), this);
 		g.dispose();
 	}
-	
-	public void keyviagem() {
-		trem.setDx(1);
-	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		
-		
-		if(i<((trem.getLargura()+trem.getLargura())+350)) {
-			trem.setDx(flag);
-			trem.update();
-			repaint();
+		if(Sinal==true) {
+
+			if(i<=distancia) {
+				trem.setDx(flag);
+				trem.update();
+				repaint();
+			}
+			
+			if(i>distancia && i<=(2*distancia)) {
+				trem.setDx(menosflag);
+				trem.update();
+				repaint();
+			}
+			if(i>=2*distancia) {
+				trem.setDx(0);
+				trem.update();
+				repaint();
+				i=0;
+				Sinal=false;
+				
+			}
+			i++;
 		}
-		
-		i++;
-		
-		if(i==((trem.getLargura()+trem.getLargura())+350)){
-			i=0;
-			flag = -flag;
-		}
-		
 		
 	}
+
+	public static void setSinal(boolean sinal) {
+		Sinal = sinal;
+	}
+	
+	
 	
 }

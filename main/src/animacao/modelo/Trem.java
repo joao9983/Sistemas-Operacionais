@@ -12,7 +12,7 @@ public class Trem {
 	private int altura, largura;
 	
 	public Trem() {
-		this.x = -350;
+		this.x = -300;
 		this.y = 638;
 	}
 	

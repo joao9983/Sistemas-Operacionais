@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import animacao.Container;
 import logica.Executor;
 import view.MainViewer;
 
@@ -58,6 +59,11 @@ public class Control implements ActionListener {
 		New.setTimeToTravel(Integer.parseInt(TempoViagem));
 		New.setWagonCapacity(Integer.parseInt(CapacidadeTrem));
 		New.setTimesToProduce(TempoEmpacotadores);
+		
+		
+		context.MinimizaForms();
+		
+		Container N = new Container();
 		
 		try {
 			New.main(null);

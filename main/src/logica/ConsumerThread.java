@@ -1,6 +1,9 @@
 package logica;
 
 import java.util.concurrent.TimeUnit;
+
+import animacao_modelo.Fase;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -21,15 +24,19 @@ public class ConsumerThread extends Thread {
 	
 	public void run() {
 		//Until the thread is interrupted...
+		Fase f = new Fase();
 		while(true) {
 			//Wait until the buffer is not empty
 			try {
 				buffer.acquireFull(wagonToTravel);
 				buffer.acquireMutex();
+				
+				
 				System.out.println("HIIII");
 				//Remove the next item and put it in the box
 				System.out.println("Retirando: " + wagonToTravel);
 				buffer.removeItem(wagonToTravel);
+				f.setSinal(true);
 				buffer.releaseMutex();
 				buffer.releaseEmpty(wagonToTravel);
 				wait(timeToTravel);

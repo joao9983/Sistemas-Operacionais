@@ -49,6 +49,7 @@ public class MainViewer {
 				try {
 					MainViewer window = new MainViewer();
 					window.frmAppThread.setVisible(true);
+					window.frmAppThread.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -251,6 +252,14 @@ public class MainViewer {
 		this.viagem_tempo_textField = viagem_tempo_textField;
 	}
 	
+	public void MinimizaForms() {
+		//frmAppThread.setVisible(false);
+		frmAppThread.dispose();
+	}
+	
+	public void DeadAll() {
+		System.exit(0);
+	}
 	
 	public void LimparTempoEmpac() {
 		tempo_empac_textField.setText("");
