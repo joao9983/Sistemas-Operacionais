@@ -147,10 +147,10 @@ public class ConsumerThread extends Thread {
 
 	public void setDx(boolean going) {
 		if(!going) {
-			this.dx = (double) (1010 - (- 410)) / (timeToTravel * 1000 );			
+			this.dx = (double) (1030 - (- 410)) / (timeToTravel * 1000 );			
 		} else {
 			//System.out.println(timeToTravel * (( 1010 - (- 410) ) / 1000 ));
-			this.dx = (double)  - (1010 - (- 410)) / (timeToTravel * 1000 );
+			this.dx = (double)  - (1030 - (- 410)) / (timeToTravel * 1000 );
 		}
 	}
 

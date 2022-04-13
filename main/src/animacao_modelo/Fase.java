@@ -141,49 +141,6 @@ public class Fase extends JPanel implements ActionListener{
 		g.dispose();
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-		if(Sinal==true) {
-
-			if(i<=distancia) {
-				trem.setImagem(trem.getEmpacotador().getImage());
-				trem.setDx(flag);
-				trem.update();
-				repaint();
-			}
-			
-			if(i>distancia && i<=(2*distancia)) {
-				trem.setImagem(trem.getEmpacotador_voltando().getImage());
-				trem.setDx(menosflag);
-				trem.update();
-				repaint();
-			}
-			if(i>=2*distancia) {
-				trem.setImagem(trem.getEmpacotador_dormindo().getImage());
-				trem.setDx(0);
-				trem.update();
-				repaint();
-				i=0;
-				j++;
-				//Sinal=false;
-				
-			}
-			i++;
-		}else {
-			trem.setImagem(trem.getEmpacotador_dormindo().getImage());
-			trem.setDx(0);
-			trem.update();
-			repaint();
-		}
-		if(j>(qtd-1)) {
-			Sinal=false;
-		}
-		
-
-	}
-
 	public void setSinal(boolean sinal) {
 		Sinal = sinal;
 	}	

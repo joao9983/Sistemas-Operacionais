@@ -51,7 +51,13 @@ public class ProducerThread extends Thread {
 					fas.repaint();
 				}
 				buffer.acquireEmpty();
+				setImagem("trabalhar");
 				wait(timeToProduce);
+				if(x != 25) {
+					this.x = 25;
+					this.totalMoved = 25;
+					fas.repaint();
+				}
 				buffer.acquireMutex();
 				//Wait until no one else is using it and prevent other access
 				//Add the produced item
@@ -84,6 +90,10 @@ public class ProducerThread extends Thread {
 	public void update(Fase fas,int times) {
 		totalMoved = totalMoved + (times * dx);
 		x = ((int) totalMoved);
+		System.out.print("Posição X: ");
+		System.out.println(x);
+		System.out.print("Posição Total: ");
+		System.out.println(totalMoved);
 //		thiss.setX(x+=dx);
 		y +=dy;
 		fas.repaint();
@@ -119,22 +129,22 @@ public class ProducerThread extends Thread {
 		long time = System.currentTimeMillis();
 		long time2 = time; 
 		if(timeToProduce == 1) {
-			setDx(false);
 			setImagem("trabalhando");
 			while(System.currentTimeMillis() - time < 500) {
 				while(System.currentTimeMillis() - time2 < 10) {}
 				time2 = System.currentTimeMillis();
+				this.dx = (double) (255 - (25)) / 500;
 				update(fas,10);
 				//System.out.println(call);
 			}
 			System.out.println("Passou primeira parte");
 			time = System.currentTimeMillis();
 			time2 = time;
-			setDx(true);
 			setImagem("voltando");
 			while(System.currentTimeMillis() - time < 500) {
 				while(System.currentTimeMillis() - time2 < 10) {}
 				time2 = System.currentTimeMillis();
+				this.dx =  -(double) (255 - (25)) / 500;
 				update(fas,10);
 			}
 		} else {
