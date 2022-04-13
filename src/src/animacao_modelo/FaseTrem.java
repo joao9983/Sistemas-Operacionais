@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import src.animacao.modelo.Trem;
 import src.logica.ConsumerThread;
 
 public class FaseTrem extends JPanel {
@@ -27,7 +28,7 @@ public class FaseTrem extends JPanel {
 		setDoubleBuffered(true);
 		this.tr = tremThread;
 		tr.setFas(this);
-		ImageIcon referencia = new ImageIcon("imgs\\fundo.png");
+		ImageIcon referencia = new ImageIcon(FaseTrem.class.getResource("/imagens/fundo.png"));
 		fundo = referencia.getImage();	
 		//timer = new Timer(1, this);
 		// A cada 1 mili segundo, ele vai executar essa bagaça

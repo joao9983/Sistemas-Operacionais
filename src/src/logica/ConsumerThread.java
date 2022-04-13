@@ -34,12 +34,12 @@ public class ConsumerThread extends Thread {
 		this.wagonToTravel = wagonToTravel;
 		this.timeToTravel = timeToTravel;
 		this.call = 0;
-		this.x = -410; //1375 1010 - Trem com vag�o some
+		this.x = 0; //1375 1010 - Trem com vag�o some
 		//this.x = -300; // Volta
 		this.y = 638;
 		this.time = timeToTravel;
 		this.start = false;
-		this.totalMoved = -410;
+		this.totalMoved = 0;
 	}
 	
 	public void run() {
@@ -54,6 +54,10 @@ public class ConsumerThread extends Thread {
 				buffer.releaseMutex();
 				buffer.releaseEmpty(wagonToTravel);
 				wait(timeToTravel);
+				if(totalMoved < 0) {
+					this.totalMoved = 0;
+					this.x = 0;
+				}
 				System.out.println("Cheguei em A");
 			} catch (InterruptedException e) {
 				//Exit notice, print anything remaining in the box, die
@@ -69,7 +73,7 @@ public class ConsumerThread extends Thread {
 	}
 	
 	public void load() {
-		ImageIcon referencia = new ImageIcon("imgs\\trem_comvagao (1).png");
+		ImageIcon referencia = new ImageIcon(ConsumerThread.class.getResource("/imagens/trem_comvagao (1).png"));
 		imagem = referencia.getImage();
 		altura = imagem.getHeight(null);
 		largura = imagem.getWidth(null);
@@ -93,6 +97,8 @@ public class ConsumerThread extends Thread {
 	private boolean wait(int timeToTravel) {
 		long time = System.currentTimeMillis();
 		long time2 = time; 
+		this.x = 0;
+		this.totalMoved = 0;
 		setDx(false);
 		changeImagem(true);
 		while(System.currentTimeMillis() - time < timeToTravel * 1000) {
@@ -107,6 +113,8 @@ public class ConsumerThread extends Thread {
 		time2 = time;
 		setDx(true);
 		changeImagem(false);
+		this.x = 810;
+		this.totalMoved = 810;
 		while(System.currentTimeMillis() - time < timeToTravel * 1000) {
 			while(System.currentTimeMillis() - time2 < 10) {}
 			time2 = System.currentTimeMillis();
@@ -132,11 +140,11 @@ public class ConsumerThread extends Thread {
 	
 	public void changeImagem(boolean going) {
 		if(going) {
-			ImageIcon referencia = new ImageIcon("imgs\\trem_comvagao (1).png");
+			ImageIcon referencia = new ImageIcon(ConsumerThread.class.getResource("/imagens/trem_comvagao (1).png"));
 			imagem = referencia.getImage();
 			this.setImagem(imagem);
 		} else {
-			ImageIcon referencia = new ImageIcon("imgs\\trem_sem_vagao.png");
+			ImageIcon referencia = new ImageIcon(ConsumerThread.class.getResource("/imagens/trem_sem_vagao.png"));
 			imagem = referencia.getImage();
 			this.setImagem(imagem);			
 		}
@@ -148,10 +156,10 @@ public class ConsumerThread extends Thread {
 
 	public void setDx(boolean going) {
 		if(!going) {
-			this.dx = (double) (1030 - (- 410)) / (timeToTravel * 1000 );			
+			this.dx = (double) (600 - 0) / (timeToTravel * 1000 );			
 		} else {
 			//System.out.println(timeToTravel * (( 1010 - (- 410) ) / 1000 ));
-			this.dx = (double)  - (1030 - (- 410)) / (timeToTravel * 1000 );
+			this.dx = (double)  (0 - (820)) / (timeToTravel * 1000 );
 		}
 	}
 
@@ -164,5 +172,3 @@ public class ConsumerThread extends Thread {
 	}
 	
 }
-
-

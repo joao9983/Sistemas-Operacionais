@@ -71,13 +71,15 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 
+import src.logica.ConsumerThread;
+
 public class Trem {
 	private int x, y;
 	private int dx, dy;
 	private Image imagem;
-	private ImageIcon empacotador = new ImageIcon("imgs\\empacotador.png");
-	private ImageIcon empacotador_voltando = new ImageIcon("imgs\\empacotador_voltando.png");
-	private ImageIcon empacotador_dormindo = new ImageIcon("imgs\\empacotador_dormindo.png");
+	private ImageIcon empacotador = new ImageIcon(Trem.class.getResource("/imagens/empacotador.png"));
+	private ImageIcon empacotador_voltando = new ImageIcon(Trem.class.getResource("/imagens/empacotador_voltando.png"));
+	private ImageIcon empacotador_dormindo = new ImageIcon(Trem.class.getResource("/imagens/empacotador_dormindo.png"));
 	private int altura, largura;
 	
 	public Trem() {

@@ -23,7 +23,12 @@ public class BoundedBuffer {
 	//Add in item to tail of the circular array
 	public void addItem() {
 		buffer = buffer + 1;
-		BarraDeProgresso.barra.setValue((buffer)+1);
+		BarraDeProgresso.barra.setValue((buffer));
+		BarraDeProgresso.barra.setString("Ocupando "+ buffer+"/"+Executor.bufferSize);
+		
+		if(buffer==Executor.bufferSize) {
+			BarraDeProgresso.barra.setString("Depósito Cheio");
+		}
 	}
 	public void printBuffer() {
 		System.out.println("Restam: " + buffer);
@@ -32,7 +37,12 @@ public class BoundedBuffer {
 	//Remove and return an item from the head of the circular array
 	public void removeItem(int quantd) {
 		buffer = buffer - quantd;
-		BarraDeProgresso.barra.setValue(buffer-quantd);
+		BarraDeProgresso.barra.setValue(buffer);
+		BarraDeProgresso.barra.setString("Ocupando "+ buffer+"/"+Executor.bufferSize);
+		
+		if(buffer==Executor.bufferSize) {
+			BarraDeProgresso.barra.setString("Depósito Cheio");
+		}
 	}
 	
 	//If the full semaphore has no permits, the buffer is empty

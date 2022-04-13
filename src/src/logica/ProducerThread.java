@@ -23,9 +23,9 @@ public class ProducerThread extends Thread {
 	private double dx, dy;
 	private Fase fas;
 	private Image imagem;
-	private ImageIcon empacotador = new ImageIcon("imgs\\empacotador.png");
-	private ImageIcon empacotador_voltando = new ImageIcon("imgs\\empacotador_voltando.png");
-	private ImageIcon empacotador_dormindo = new ImageIcon("imgs\\empacotador_dormindo.png");
+	private ImageIcon empacotador = new ImageIcon(ProducerThread.class.getResource("/imagens/empacotador.png"));
+	private ImageIcon empacotador_voltando = new ImageIcon(ProducerThread.class.getResource("/imagens/empacotador_voltando.png"));
+	private ImageIcon empacotador_dormindo = new ImageIcon(ProducerThread.class.getResource("/imagens/empacotador_dormindo.png"));
 	private int altura, largura;
 	private double totalMoved;
 	//Initialize in constructor

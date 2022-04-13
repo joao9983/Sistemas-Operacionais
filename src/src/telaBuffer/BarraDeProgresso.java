@@ -1,6 +1,8 @@
 package src.telaBuffer;
 
 import java.awt.Color;
+import java.awt.*;
+import javax.swing.*;
 
 import javax.swing.JFrame;
 import javax.swing.JProgressBar;
@@ -10,7 +12,7 @@ import src.logica.Executor;
 public class BarraDeProgresso extends JFrame {
 
 	private Executor executor;		//será usado para get em class Executor tamanho do buffer
-	public static JProgressBar barra = new JProgressBar();
+	public static JProgressBar barra = new JProgressBar(0,(Executor.getWagonCapacity()));
 
 
 	public BarraDeProgresso() {
@@ -21,7 +23,13 @@ public class BarraDeProgresso extends JFrame {
 		barra.setMinimum(0);
 		barra.setMaximum(executor.getBufferSize());		//Recebe o tamanho do buffer de executor
 		barra.setForeground(Color.GRAY);
+		//barra.setFont(new Font("MV Boli",Font.BOLD,20));
+		barra.setBackground(Color.white);
+		
 		add(barra);
+		
+		
+		
 	}
 	
 	public void configurarJanela( ) {
@@ -34,7 +42,7 @@ public class BarraDeProgresso extends JFrame {
 	}
 	
 	public static void main(String[] args) {
-		//new BarraDeProgresso();
+	//	new BarraDeProgresso();
 	}
 	
 	public class Func {
