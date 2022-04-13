@@ -34,7 +34,7 @@ public class ProducerThread extends Thread {
 		this.producerNumber = producerNumber;
 		this.x = 25; // x = 250 max
 		this.y = y;
-		this.totalMoved = 0;
+		this.totalMoved = 25;
 	}
 	
 	public void run() {
@@ -43,13 +43,15 @@ public class ProducerThread extends Thread {
 				//Wait until the buffer is not full
 				if(buffer.empty.availablePermits() != 0) { 
 					setImagem("trabalhar"); 
+					System.out.println("!=0");
 					fas.repaint();
 				} else {
+					System.out.println("else");
 					setImagem("dormindo");
 					fas.repaint();
 				}
-				wait(timeToProduce);
 				buffer.acquireEmpty();
+				wait(timeToProduce);
 				buffer.acquireMutex();
 				//Wait until no one else is using it and prevent other access
 				//Add the produced item
@@ -81,31 +83,35 @@ public class ProducerThread extends Thread {
 
 	public void update(Fase fas,int times) {
 		totalMoved = totalMoved + (times * dx);
-		//x = ((int) totalMoved);
+		x = ((int) totalMoved);
 //		thiss.setX(x+=dx);
 		y +=dy;
-		//fas.repaint();
+		fas.repaint();
 	}
 	
 	public void setImagem(String name) {
 		if(name == "dormindo") {
+			System.out.println("A mimir");
 			this.imagem = empacotador_dormindo.getImage();
+			this.fas.repaint();
 		} else if (name == "trabalhar") {
+			System.out.println("A ir");
 			this.imagem = empacotador.getImage();
+			this.fas.repaint();
 		} else if (name == "voltando") {
+			System.out.println("A voltar");
 			this.imagem = empacotador_voltando.getImage();
+			this.fas.repaint();
 		}
 	}
 	public void setDx(boolean going) {
 		if(!going) {
-			System.out.println((double) (50) - 25 / ((timeToProduce/2) * 1000 ));
-			this.dx = (double) (50) - 25 / ((timeToProduce/2) * 1000 );
-			this.dx = 0;
+			System.out.println((double) (250) - 25 / (float) ((timeToProduce/2) * 1000 ));
+			this.dx = (double) (250 - (25)) / (timeToProduce/2 * 1000 );
 		} else {
 			//System.out.println(timeToTravel * (( 1010 - (- 410) ) / 1000 ));
-			System.out.println((double) (25) - 50 / ((timeToProduce/2) * 1000 ));
-			this.dx = (double)  (25 - (50)) / ((timeToProduce/2) * 1000 );
-			this.dx = 0;
+			System.out.println((double)  ((25 - (250)) / ((timeToProduce/2) * 1000 )));
+			this.dx = (double) (25 - (250)) / (timeToProduce/2 * 1000 );
 		}
 	}
 	
@@ -118,7 +124,7 @@ public class ProducerThread extends Thread {
 			while(System.currentTimeMillis() - time < 500) {
 				while(System.currentTimeMillis() - time2 < 10) {}
 				time2 = System.currentTimeMillis();
-				update(fas,2);
+				update(fas,10);
 				//System.out.println(call);
 			}
 			System.out.println("Passou primeira parte");
@@ -129,27 +135,7 @@ public class ProducerThread extends Thread {
 			while(System.currentTimeMillis() - time < 500) {
 				while(System.currentTimeMillis() - time2 < 10) {}
 				time2 = System.currentTimeMillis();
-				update(fas,2);
-			}
-		} else if ( timeToProduce % 2 != 0){
-			int timeToBack = (timeToProduce - 2 * ((int) (timeToProduce / 2 )));
-			setDx(false);
-			setImagem("trabalhando");
-			while(System.currentTimeMillis() - time < (timeToProduce - timeToBack) * 1000) {
-				while(System.currentTimeMillis() - time2 < 10) {}
-				time2 = System.currentTimeMillis();
-				update(fas,2);
-				//System.out.println(call);
-			}
-			System.out.println("Passou primeira parte");
-			time = System.currentTimeMillis();
-			time2 = time;
-			setDx(true);
-			setImagem("voltando");
-			while(System.currentTimeMillis() - time < timeToBack * 1000) {
-				while(System.currentTimeMillis() - time2 < 10) {}
-				time2 = System.currentTimeMillis();
-				update(fas,2);
+				update(fas,10);
 			}
 		} else {
 			setDx(false);
@@ -157,7 +143,7 @@ public class ProducerThread extends Thread {
 			while(System.currentTimeMillis() - time < (timeToProduce/2) * 1000) {
 				while(System.currentTimeMillis() - time2 < 10) {}
 				time2 = System.currentTimeMillis();
-				update(fas,2);
+				update(fas,10);
 				//System.out.println(call);
 			}
 			System.out.println("Passou primeira parte");
@@ -168,7 +154,7 @@ public class ProducerThread extends Thread {
 			while(System.currentTimeMillis() - time < (timeToProduce/2) * 1000) {
 				while(System.currentTimeMillis() - time2 < 10) {}
 				time2 = System.currentTimeMillis();
-				update(fas,2);
+				update(fas,10);
 			}
 		}
 

@@ -121,6 +121,7 @@ public class Fase extends JPanel implements ActionListener{
 		for(i = 0; i < list.size(); i ++) {
 			System.out.println("Hello");
 			list.get(i).setFas(this);
+			list.get(i).load();
 			list.get(i).start();
 		}
 		//timer = new Timer(30, this);
@@ -135,7 +136,6 @@ public class Fase extends JPanel implements ActionListener{
 		Image img;
 		graficos.drawImage(fundo, 0, 0, null);
 		for(i = 0;i < list.size(); i++) {
-			list.get(i).load();
 			graficos.drawImage(list.get(i).getImage(), list.get(i).x, list.get(i).y, this);			
 		}
 		g.dispose();
