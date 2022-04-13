@@ -32,7 +32,7 @@ public class ProducerThread extends Thread {
 		this.buffer = buffer;
 		this.timeToProduce = timeToProduce;
 		this.producerNumber = producerNumber;
-		this.x = 25;
+		this.x = 25; // x = 250 max
 		this.y = y;
 		this.totalMoved = 0;
 	}
@@ -81,12 +81,10 @@ public class ProducerThread extends Thread {
 
 	public void update(Fase fas,int times) {
 		totalMoved = totalMoved + (times * dx);
-		System.out.print("Movido: ");
-		System.out.println(totalMoved);
-		x = ((int) totalMoved);
-//		this.setX(x+=dx);
+		//x = ((int) totalMoved);
+//		thiss.setX(x+=dx);
 		y +=dy;
-		fas.repaint();
+		//fas.repaint();
 	}
 	
 	public void setImagem(String name) {
@@ -100,10 +98,14 @@ public class ProducerThread extends Thread {
 	}
 	public void setDx(boolean going) {
 		if(!going) {
-			this.dx = (double) (50) - 25 / ((timeToProduce/2) * 1000 );			
+			System.out.println((double) (50) - 25 / ((timeToProduce/2) * 1000 ));
+			this.dx = (double) (50) - 25 / ((timeToProduce/2) * 1000 );
+			this.dx = 0;
 		} else {
 			//System.out.println(timeToTravel * (( 1010 - (- 410) ) / 1000 ));
+			System.out.println((double) (25) - 50 / ((timeToProduce/2) * 1000 ));
 			this.dx = (double)  (25 - (50)) / ((timeToProduce/2) * 1000 );
+			this.dx = 0;
 		}
 	}
 	
@@ -111,10 +113,12 @@ public class ProducerThread extends Thread {
 		long time = System.currentTimeMillis();
 		long time2 = time; 
 		if(timeToProduce == 1) {
+			setDx(false);
+			setImagem("trabalhando");
 			while(System.currentTimeMillis() - time < 500) {
 				while(System.currentTimeMillis() - time2 < 10) {}
 				time2 = System.currentTimeMillis();
-				update(fas,10);
+				update(fas,2);
 				//System.out.println(call);
 			}
 			System.out.println("Passou primeira parte");
@@ -125,15 +129,16 @@ public class ProducerThread extends Thread {
 			while(System.currentTimeMillis() - time < 500) {
 				while(System.currentTimeMillis() - time2 < 10) {}
 				time2 = System.currentTimeMillis();
-				update(fas,10);
+				update(fas,2);
 			}
 		} else if ( timeToProduce % 2 != 0){
 			int timeToBack = (timeToProduce - 2 * ((int) (timeToProduce / 2 )));
-			
+			setDx(false);
+			setImagem("trabalhando");
 			while(System.currentTimeMillis() - time < (timeToProduce - timeToBack) * 1000) {
 				while(System.currentTimeMillis() - time2 < 10) {}
 				time2 = System.currentTimeMillis();
-				update(fas,10);
+				update(fas,2);
 				//System.out.println(call);
 			}
 			System.out.println("Passou primeira parte");
@@ -144,7 +149,7 @@ public class ProducerThread extends Thread {
 			while(System.currentTimeMillis() - time < timeToBack * 1000) {
 				while(System.currentTimeMillis() - time2 < 10) {}
 				time2 = System.currentTimeMillis();
-				update(fas,10);
+				update(fas,2);
 			}
 		} else {
 			setDx(false);
@@ -152,7 +157,7 @@ public class ProducerThread extends Thread {
 			while(System.currentTimeMillis() - time < (timeToProduce/2) * 1000) {
 				while(System.currentTimeMillis() - time2 < 10) {}
 				time2 = System.currentTimeMillis();
-				update(fas,10);
+				update(fas,2);
 				//System.out.println(call);
 			}
 			System.out.println("Passou primeira parte");
@@ -163,7 +168,7 @@ public class ProducerThread extends Thread {
 			while(System.currentTimeMillis() - time < (timeToProduce/2) * 1000) {
 				while(System.currentTimeMillis() - time2 < 10) {}
 				time2 = System.currentTimeMillis();
-				update(fas,10);
+				update(fas,2);
 			}
 		}
 

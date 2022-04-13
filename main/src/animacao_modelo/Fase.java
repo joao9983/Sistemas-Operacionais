@@ -135,7 +135,6 @@ public class Fase extends JPanel implements ActionListener{
 		Image img;
 		graficos.drawImage(fundo, 0, 0, null);
 		for(i = 0;i < list.size(); i++) {
-			System.out.println(list.size());
 			list.get(i).load();
 			graficos.drawImage(list.get(i).getImage(), list.get(i).x, list.get(i).y, this);			
 		}
