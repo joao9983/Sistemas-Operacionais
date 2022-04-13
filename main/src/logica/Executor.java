@@ -2,6 +2,7 @@ package logica;
 
 import java.util.ArrayList;
 import animacao.Container;
+import animacao.ContainerTrem;
 
 public class Executor {
 	
@@ -52,7 +53,8 @@ public class Executor {
 		}
 		//Create and start the consumers
 		ConsumerThread consumer = new ConsumerThread(buffer,1,timeToTravel,wagonCapacity);
-		new Container(consumer);
+		new Container(producerThreads);
+		new ContainerTrem(consumer);
 	
 	}
 

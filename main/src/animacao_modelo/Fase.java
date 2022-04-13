@@ -107,7 +107,9 @@ public class Fase extends JPanel implements ActionListener{
 	private int distancia = 220/flag;
 	private ArrayList<ProducerThread> list;
 	private int length;
-	public Fase(ArrayList<ProducerThread> list, int length) {
+	
+	
+	public Fase(ArrayList<ProducerThread> list) {
 		
 //		setFocusable(true);
 //		setDoubleBuffered(true);
@@ -115,7 +117,6 @@ public class Fase extends JPanel implements ActionListener{
 		ImageIcon referencia = new ImageIcon("imgs\\fundo_deposito.png");
 		fundo = referencia.getImage();
 		this.list = list;
-		this.length = length;
 		
 		//timer = new Timer(30, this);
 		//timer.start();

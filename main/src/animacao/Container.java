@@ -1,5 +1,7 @@
 package animacao;
 
+import java.util.ArrayList;
+
 //
 //
 //import javax.swing.JFrame;
@@ -27,15 +29,16 @@ package animacao;
 import javax.swing.JFrame;
 
 import animacao_modelo.Fase;
+import logica.ProducerThread;
 
 
 public class Container extends JFrame {
 	private static final long serialVersionUID = 1L;
 
-	public Container() {
+	public Container(ArrayList<ProducerThread> list) {
 		
-		add(new Fase());
-		setTitle("Anime");
+		add(new Fase(list));
+		setTitle("Empacotador");
 		setSize(315, 750);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
