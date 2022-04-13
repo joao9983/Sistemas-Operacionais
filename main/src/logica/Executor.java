@@ -46,7 +46,7 @@ public class Executor {
 		//Create and start the producers
 		producerThreads = new ArrayList<ProducerThread>(numProducers);
 		for(int i = 0; i < numProducers; i++) {
-			ProducerThread producer = new ProducerThread(buffer, timesToProduce.get(i), i);
+			ProducerThread producer = new ProducerThread(buffer, timesToProduce.get(i), i, (i + 1) * 50);
 			producerThreads.add(producer);
 			producer.start();
 		}

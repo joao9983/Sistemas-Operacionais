@@ -7,7 +7,7 @@ public class BoundedBuffer {
 	private int buffer;
 	public int capacity;
 	private Semaphore mutex;
-	private Semaphore empty;
+	public Semaphore empty;
 	private Semaphore full;
 	
 	//Initialize everything in the constructor
