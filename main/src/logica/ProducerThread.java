@@ -18,7 +18,7 @@ public class ProducerThread extends Thread {
 	private int timeToProduce;
 	private int producerNumber;
 	private long t = 5L;
-	private int x, y;
+	public int x, y;
 	private double dx, dy;
 	private Fase fas;
 	private Image imagem;

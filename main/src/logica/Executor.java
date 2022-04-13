@@ -49,7 +49,7 @@ public class Executor {
 		for(int i = 0; i < numProducers; i++) {
 			ProducerThread producer = new ProducerThread(buffer, timesToProduce.get(i), i, (i + 1) * 50);
 			producerThreads.add(producer);
-			producer.start();
+			//producer.start();
 		}
 		//Create and start the consumers
 		ConsumerThread consumer = new ConsumerThread(buffer,1,timeToTravel,wagonCapacity);

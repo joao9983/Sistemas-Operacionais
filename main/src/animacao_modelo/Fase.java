@@ -117,7 +117,12 @@ public class Fase extends JPanel implements ActionListener{
 		ImageIcon referencia = new ImageIcon("imgs\\fundo_deposito.png");
 		fundo = referencia.getImage();
 		this.list = list;
-		
+		int i = 0;
+		for(i = 0; i < list.size(); i ++) {
+			System.out.println("Hello");
+			list.get(i).setFas(this);
+			//list.get(i).start();
+		}
 		//timer = new Timer(30, this);
 		//timer.start();
 		
@@ -129,9 +134,10 @@ public class Fase extends JPanel implements ActionListener{
 		int i = 0;
 		Image img;
 		graficos.drawImage(fundo, 0, 0, null);
-		for(i = 0;i < length; i++) {
-			graficos.drawImage(list.get(i).getImage(), list.get(i).x, list.get(i).y, this);
-			list.get(i).start();
+		for(i = 0;i < list.size(); i++) {
+			System.out.println(list.size());
+			list.get(i).load();
+			graficos.drawImage(list.get(i).getImage(), list.get(i).x, list.get(i).y, this);			
 		}
 		g.dispose();
 	}
