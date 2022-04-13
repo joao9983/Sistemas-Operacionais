@@ -67,6 +67,14 @@ public class ProducerThread extends Thread {
 		}
 	}
 	
+	public void load() {
+		this.imagem = empacotador.getImage();
+	}
+	
+	public Image getImage() {
+		return this.imagem;
+	}
+	
 	public void setFas(Fase fas) {
 		this.fas = fas;
 	}
@@ -104,19 +112,18 @@ public class ProducerThread extends Thread {
 		long time2 = time; 
 		setDx(false);
 		setImagem("trabalhando");
-		while(System.currentTimeMillis() - time < timeToTravel * 1000) {
+		while(System.currentTimeMillis() - time < timeToProduce * 1000) {
 			while(System.currentTimeMillis() - time2 < 10) {}
 			time2 = System.currentTimeMillis();
 			update(fas,10);
 			//System.out.println(call);
 		}
-		this.call = 0;
 		System.out.println("Passou primeira parte");
 		time = System.currentTimeMillis();
 		time2 = time;
 		setDx(true);
 		setImagem("voltando");
-		while(System.currentTimeMillis() - time < timeToTravel * 1000) {
+		while(System.currentTimeMillis() - time < timeToProduce * 1000) {
 			while(System.currentTimeMillis() - time2 < 10) {}
 			time2 = System.currentTimeMillis();
 			update(fas,10);

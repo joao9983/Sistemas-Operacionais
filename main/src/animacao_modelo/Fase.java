@@ -88,12 +88,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import animacao.modelo.Trem;
+import logica.ProducerThread;
 
 public class Fase extends JPanel implements ActionListener{
 	private Image fundo;
@@ -103,28 +105,31 @@ public class Fase extends JPanel implements ActionListener{
 	public int i = 0, j=0, flag = 4, qtd=3;
 	public int menosflag = 0-flag;
 	private int distancia = 220/flag;
-	
-	public Fase() {
+	private ArrayList<ProducerThread> list;
+	private int length;
+	public Fase(ArrayList<ProducerThread> list, int length) {
 		
 //		setFocusable(true);
 //		setDoubleBuffered(true);
 		
 		ImageIcon referencia = new ImageIcon("imgs\\fundo_deposito.png");
 		fundo = referencia.getImage();
+		this.list = list;
+		this.length = length;
 		
-		trem = new Trem();
-		trem.load();
-		
-		timer = new Timer(30, this);
-		timer.start();
+		//timer = new Timer(30, this);
+		//timer.start();
 		
 	}
 	
 	public void paint(Graphics g) {
 		Graphics2D graficos = (Graphics2D) g;
+		int i = 0;
+		Image img;
 		graficos.drawImage(fundo, 0, 0, null);
-		graficos.drawImage(trem.getImagem(), trem.getX(), trem.getY(), this);
-		graficos.drawImage(trem.getImagem(), trem.getX(), 2 * trem.getY(), this);
+		for(i = 0;i < length; i++) {
+			graficos.drawImage(list.get(i).getImage(), list.get(i).x, list.get(i).y, this);
+		}
 		g.dispose();
 	}
 
