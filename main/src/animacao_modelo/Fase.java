@@ -122,13 +122,15 @@ public class Fase extends JPanel implements ActionListener{
 		
 	}
 	
-	public void paint(Graphics g) {
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		Graphics2D graficos = (Graphics2D) g;
 		int i = 0;
 		Image img;
 		graficos.drawImage(fundo, 0, 0, null);
 		for(i = 0;i < length; i++) {
 			graficos.drawImage(list.get(i).getImage(), list.get(i).x, list.get(i).y, this);
+			list.get(i).start();
 		}
 		g.dispose();
 	}

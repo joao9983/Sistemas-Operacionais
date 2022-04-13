@@ -7,7 +7,7 @@ import java.awt.Image;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
-import animacao_modelo.Fase;
+import animacao_modelo.FaseTrem;
 
 public class ConsumerThread extends Thread {
 	
@@ -24,7 +24,7 @@ public class ConsumerThread extends Thread {
 	private int time;
 	private double totalMoved;
 	private boolean start;
-	private Fase fas;
+	private FaseTrem fas;
 	
 	//Initialize variables in constructor
 	public ConsumerThread(BoundedBuffer buffer, int consumerNumber, int timeToTravel, int wagonToTravel) {
@@ -62,7 +62,7 @@ public class ConsumerThread extends Thread {
 		}
 	}
 	
-	public void setFas(Fase fas)
+	public void setFas(FaseTrem fas)
 	{
 		this.fas = fas;
 	}
@@ -74,7 +74,7 @@ public class ConsumerThread extends Thread {
 		largura = imagem.getWidth(null);
 	}
 	
-	public void update(Fase fas,int times) {
+	public void update(FaseTrem fas,int times) {
 		totalMoved = totalMoved + (times * dx);
 		System.out.print("Movido: ");
 		System.out.println(totalMoved);
