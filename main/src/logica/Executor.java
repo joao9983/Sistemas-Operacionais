@@ -53,8 +53,8 @@ public class Executor {
 		}
 		//Create and start the consumers
 		ConsumerThread consumer = new ConsumerThread(buffer,1,timeToTravel,wagonCapacity);
-		new Container(producerThreads);
 		new ContainerTrem(consumer);
+		new Container(producerThreads);
 	
 	}
 

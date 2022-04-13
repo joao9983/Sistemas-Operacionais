@@ -48,11 +48,11 @@ public class ProducerThread extends Thread {
 					setImagem("dormindo");
 					fas.repaint();
 				}
+				wait(timeToProduce);
 				buffer.acquireEmpty();
 				buffer.acquireMutex();
 				//Wait until no one else is using it and prevent other access
 				//Add the produced item
-				wait(timeToProduce);
 				System.out.println("Adicionando ao buffer");
 				buffer.addItem();
 				System.out.println("Buffer depois de adicionado:");
@@ -100,34 +100,73 @@ public class ProducerThread extends Thread {
 	}
 	public void setDx(boolean going) {
 		if(!going) {
-			this.dx = (double) (220) - 25 / ((timeToProduce/2) * 1000 );			
+			this.dx = (double) (50) - 25 / ((timeToProduce/2) * 1000 );			
 		} else {
 			//System.out.println(timeToTravel * (( 1010 - (- 410) ) / 1000 ));
-			this.dx = (double)  (25 - (220)) / ((timeToProduce/2) * 1000 );
+			this.dx = (double)  (25 - (50)) / ((timeToProduce/2) * 1000 );
 		}
 	}
 	
 	private boolean wait(int timeToProduce) {
 		long time = System.currentTimeMillis();
 		long time2 = time; 
-		setDx(false);
-		setImagem("trabalhando");
-		while(System.currentTimeMillis() - time < timeToProduce * 1000) {
-			while(System.currentTimeMillis() - time2 < 10) {}
-			time2 = System.currentTimeMillis();
-			update(fas,10);
-			//System.out.println(call);
+		if(timeToProduce == 1) {
+			while(System.currentTimeMillis() - time < 500) {
+				while(System.currentTimeMillis() - time2 < 10) {}
+				time2 = System.currentTimeMillis();
+				update(fas,10);
+				//System.out.println(call);
+			}
+			System.out.println("Passou primeira parte");
+			time = System.currentTimeMillis();
+			time2 = time;
+			setDx(true);
+			setImagem("voltando");
+			while(System.currentTimeMillis() - time < 500) {
+				while(System.currentTimeMillis() - time2 < 10) {}
+				time2 = System.currentTimeMillis();
+				update(fas,10);
+			}
+		} else if ( timeToProduce % 2 != 0){
+			int timeToBack = (timeToProduce - 2 * ((int) (timeToProduce / 2 )));
+			
+			while(System.currentTimeMillis() - time < (timeToProduce - timeToBack) * 1000) {
+				while(System.currentTimeMillis() - time2 < 10) {}
+				time2 = System.currentTimeMillis();
+				update(fas,10);
+				//System.out.println(call);
+			}
+			System.out.println("Passou primeira parte");
+			time = System.currentTimeMillis();
+			time2 = time;
+			setDx(true);
+			setImagem("voltando");
+			while(System.currentTimeMillis() - time < timeToBack * 1000) {
+				while(System.currentTimeMillis() - time2 < 10) {}
+				time2 = System.currentTimeMillis();
+				update(fas,10);
+			}
+		} else {
+			setDx(false);
+			setImagem("trabalhando");
+			while(System.currentTimeMillis() - time < (timeToProduce/2) * 1000) {
+				while(System.currentTimeMillis() - time2 < 10) {}
+				time2 = System.currentTimeMillis();
+				update(fas,10);
+				//System.out.println(call);
+			}
+			System.out.println("Passou primeira parte");
+			time = System.currentTimeMillis();
+			time2 = time;
+			setDx(true);
+			setImagem("voltando");
+			while(System.currentTimeMillis() - time < (timeToProduce/2) * 1000) {
+				while(System.currentTimeMillis() - time2 < 10) {}
+				time2 = System.currentTimeMillis();
+				update(fas,10);
+			}
 		}
-		System.out.println("Passou primeira parte");
-		time = System.currentTimeMillis();
-		time2 = time;
-		setDx(true);
-		setImagem("voltando");
-		while(System.currentTimeMillis() - time < timeToProduce * 1000) {
-			while(System.currentTimeMillis() - time2 < 10) {}
-			time2 = System.currentTimeMillis();
-			update(fas,10);
-		}
+
 		// Atualizar a cada x ms, encontrar quanto que atualiza a cada 1ms
 		// mas atualizar somente a cada y ms, o que faria o valor de 
 		// att ser y * dx;

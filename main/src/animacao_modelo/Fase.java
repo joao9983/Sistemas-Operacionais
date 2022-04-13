@@ -121,7 +121,7 @@ public class Fase extends JPanel implements ActionListener{
 		for(i = 0; i < list.size(); i ++) {
 			System.out.println("Hello");
 			list.get(i).setFas(this);
-			//list.get(i).start();
+			list.get(i).start();
 		}
 		//timer = new Timer(30, this);
 		//timer.start();
